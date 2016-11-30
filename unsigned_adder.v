@@ -25,7 +25,7 @@ module unsigned_adder(
     input [15:0]val_b,
     output reg [15:0]result
     );
-    always@(val_a, val_b)
+    always@(val_a,val_b)
     begin
         result <= val_a + val_b;
     end

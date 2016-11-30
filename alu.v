@@ -38,10 +38,10 @@ module alu(
     always@(X, Y, opcod)
     begin
         case (opcod)
-            //3'b000: // AND
-            //3'b001: // OR
-            3'b010: unsigned_adder(X, Y, output_result); //add
-            //3'b110: // subtract
+            3'b000: output_result = X & Y;
+            3'b001: output_result = X + Y;
+            3'b010: full_adder_16_bit(X, Y, Cin, Cout, output_result); // unsigned adder
+            3'b110: // subtract
             //3'b111: // set on less than
             //default:
         endcase
