@@ -21,6 +21,16 @@
 
 
 module pc(
-
+    input clk,
+    input [4:0]in_add,
+    output [4:0]out_add
     );
+    
+    initial begin
+        out_add = 0;
+    end
+    
+    always @(posedge clk)
+        out_add <= in_add;
+        
 endmodule

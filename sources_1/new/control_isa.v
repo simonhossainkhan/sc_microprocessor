@@ -32,6 +32,15 @@ module control_isa(
     output aluSrc
     );
     
+    reg regDst;
+    reg regWrite;
+    reg branch;
+    reg memRead;
+    reg memToReg;
+    reg memWrite;
+    reg aluOp;
+    reg aluSrc;
+    
     // if most significant bit is 0 - it is r type
     always@(opCode)
         begin
@@ -134,5 +143,6 @@ module control_isa(
                     end
             endcase
         end
+
             
 endmodule
