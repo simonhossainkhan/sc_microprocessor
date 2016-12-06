@@ -18,13 +18,14 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-
-
 module read_register_16_bit(
-    input [15:0] registers [0:15],
+	input [255:0] registers_flat,
     input [3:0] s,
     output [15:0] out
     );
+	
+	wire [15:0] registers [0:15];
+	assign {registers[15], registers[14], registers[13], registers[12], registers[11], registers[10], registers[9], registers[8], registers[7], registers[6], registers[5], registers[4], registers[3], registers[2], registers[1], registers[0]} = registers_flat;
     
     wire [3:0] s_not;
     wire [15:0] register_and [0:15];
@@ -51,7 +52,6 @@ module read_register_16_bit(
     and and14[0:15](register_and[14], registers[14], s[3], s[2], s[1], s_not[0]);
     and and15[0:15](register_and[15], registers[15], s[3], s[2], s[1], s[0]);
     
-    
     or or1[0:15](
         out,
         register_and[0],
@@ -72,4 +72,4 @@ module read_register_16_bit(
         register_and[15]
         );
         
-    endmodule
+endmodule

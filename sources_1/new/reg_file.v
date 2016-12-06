@@ -18,43 +18,40 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-
-
 module reg_file(
-    output [15:0]A,
-    output [15:0]B,
-    input [15:0]C,
-    input [3:0]Aaddr,
-    input [3:0]Baddr,
-    input [3:0]Caddr,
-    input Load,
-    input clk  // rising edge of clk
+    output [15:0] A,   // Read data 1
+    output [15:0] B,   // Read data 2
+    input [15:0] C,    // Write data
+    input [3:0] Aaddr, // Read register 1
+    input [3:0] Baddr, // Read register 2
+    input [3:0] Caddr, // Write register
+    input reg_write,   // RegWrite
+    input clock        // Rising edge of clock
     );
+	
     wire [15:0] caddr_select;
     wire [15:0] regout [0:15];
         
-    decoder_4_to_16 decoder(Load,Caddr,caddr_select);
+    decoder_4_to_16 decoder(Caddr, caddr_select, reg_write);
         
-    register_16_bit register0(clk,caddr_select[0],C,regout[0]);
-    register_16_bit register1(clk,caddr_select[1],C,regout[1]);
-    register_16_bit register2(clk,caddr_select[2],C,regout[2]);
-    register_16_bit register3(clk,caddr_select[3],C,regout[3]);
-    register_16_bit register4(clk,caddr_select[4],C,regout[4]);
-    register_16_bit register5(clk,caddr_select[5],C,regout[5]);
-    register_16_bit register6(clk,caddr_select[6],C,regout[6]);
-    register_16_bit register7(clk,caddr_select[7],C,regout[7]);
-    register_16_bit register8(clk,caddr_select[8],C,regout[8]);
-    register_16_bit register9(clk,caddr_select[9],C,regout[9]);
-    register_16_bit register10(clk,caddr_select[10],C,regout[10]);
-    register_16_bit register11(clk,caddr_select[11],C,regout[11]);
-    register_16_bit register12(clk,caddr_select[12],C,regout[12]);
-    register_16_bit register13(clk,caddr_select[13],C,regout[13]);
-    register_16_bit register14(clk,caddr_select[14],C,regout[14]);
-    register_16_bit register15(clk,caddr_select[15],C,regout[15]);
+    register_16_bit register0(clock, caddr_select[0], C, regout[0]);
+    register_16_bit register1(clock, caddr_select[1], C, regout[1]);
+    register_16_bit register2(clock, caddr_select[2], C, regout[2]);
+    register_16_bit register3(clock, caddr_select[3], C, regout[3]);
+    register_16_bit register4(clock, caddr_select[4], C, regout[4]);
+    register_16_bit register5(clock, caddr_select[5], C, regout[5]);
+    register_16_bit register6(clock, caddr_select[6], C, regout[6]);
+    register_16_bit register7(clock, caddr_select[7], C, regout[7]);
+    register_16_bit register8(clock, caddr_select[8], C, regout[8]);
+    register_16_bit register9(clock, caddr_select[9], C, regout[9]);
+    register_16_bit register10(clock, caddr_select[10], C, regout[10]);
+    register_16_bit register11(clock, caddr_select[11], C, regout[11]);
+    register_16_bit register12(clock, caddr_select[12], C, regout[12]);
+    register_16_bit register13(clock, caddr_select[13], C, regout[13]);
+    register_16_bit register14(clock, caddr_select[14], C, regout[14]);
+    register_16_bit register15(clock, caddr_select[15], C, regout[15]);
     
-    read_register_16_bit data_out_A(regout,Aaddr,A);
-    
-    read_register_16_bit data_out_B(regout,Baddr,B);
-    
+    read_register_16_bit data_out_A({regout[15], regout[14], regout[13], regout[12], regout[11], regout[10], regout[9], regout[8], regout[7], regout[6], regout[5], regout[4], regout[3], regout[2], regout[1], regout[0]}, Aaddr, A);
+    read_register_16_bit data_out_B({regout[15], regout[14], regout[13], regout[12], regout[11], regout[10], regout[9], regout[8], regout[7], regout[6], regout[5], regout[4], regout[3], regout[2], regout[1], regout[0]}, Baddr, B);
         
 endmodule

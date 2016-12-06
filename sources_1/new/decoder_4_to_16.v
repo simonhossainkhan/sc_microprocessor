@@ -21,11 +21,11 @@
 
 
 module decoder_4_to_16(c_addr, select_line, load);
-    input [3:0] c_addr  ;
-    input  load ; 
-    output [15:0] select_line ; 
+    input [3:0] c_addr;
+    input load; 
+    output [15:0] select_line; 
             
-    wire [15:0] select_line ; 
+    wire [15:0] select_line; 
     
     assign select_line = (load) ? (1 << c_addr) : 16'b0 ;
 

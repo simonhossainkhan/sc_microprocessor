@@ -18,8 +18,6 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-
-
 module register_16_bit(
     input clk,
     input ce,
@@ -27,7 +25,7 @@ module register_16_bit(
     output [15:0] data_out
    );
    
-   d_flip_flop dff[15:0](clk,ce,data_in, data_out); // creates 16 d flip flops based for each bit of input/output
+   d_flip_flop dff[15:0](clk, ce, data_in, data_out); // creates 16 d flip flops based for each bit of input/output
    
 endmodule
    
